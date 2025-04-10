@@ -1,0 +1,104 @@
+.modalContent {
+    background-color: rgba(0, 0, 0, 0.85);
+    border-radius: 12px;
+    padding: 20px;
+    max-width: 650px; /* Justert bredde for bedre plassbruk */
+    width: 80%;
+    color: #fbeec1;
+    font-family: 'Cinzel Decorative', serif;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+    position: absolute;
+    top: 10%; /* Justert posisjon for å gi mer plass på toppen */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 12px; /* Litt mer plass før overskriften */
+    text-align: center;
+    font-weight: bold;
+    color: #fbeec1;
+  }
+  
+  .category {
+    margin-bottom: 20px; /* Jevnere avstand mellom kategoriene */
+  }
+  
+  .category h3 {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: left;
+    color: #fbeec1;
+  }
+  
+  .itemsContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  
+  .item {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    min-height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: background-color 0.3s ease;
+  }
+  
+  .item:hover {
+    background-color: #e6ac2a;
+  }
+  
+  .itemName {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 6px;
+    color: #fbeec1;
+  }
+  
+  .itemEffect {
+    font-size: 1rem;
+    color: #e6ac2a;
+    margin-bottom: 6px;
+  }
+  
+  .itemDescription {
+    font-size: 0.9rem;
+    color: #fbeec1;
+    margin-top: 4px;
+    text-align: left;
+    height: 50px; /* Begrens beskrivelsen til en fast høyde */
+    overflow: hidden;
+  }
+  
+  .closeButton {
+    margin-top: 20px; /* Mindre plass under knappen */
+    background-color: #fcbf49;
+    color: #1a1a1a;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-family: 'Cinzel Decorative', serif;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    display: block;
+    margin: 0 auto;
+    border: 2px solid #e6ac2a;
+  }
+  
+  .closeButton:hover {
+    background-color: #e6ac2a;
+    transform: scale(1.05);
+  }
+  

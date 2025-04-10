@@ -1,0 +1,12 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* låser alt på skjermen */
+    height: 100vh;
+  }
+  
+  
+  h1, h2, .title {
+    font-family: 'Cinzel', serif;
+  }
+  
