@@ -1,38 +1,9 @@
-.container {
-    width: 100vw;
-    height: 100vh;
+.cityContainer {
     position: relative;
-    overflow: hidden;
-  }
-  
-  .overlay {
-    background: rgba(0, 0, 0, 0.6);
-    padding: 40px;
-    color: #fbeec1;
-    font-family: 'Cinzel Decorative', serif;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-  }
-  
-  .title {
-    font-size: 3rem;
-    margin-bottom: 12px;
-    text-align: center;
-  }
-  
-  .description {
-    font-size: 1.1rem;
-    text-align: center;
-    margin-bottom: 30px;
-    max-width: 800px;
-  }
-  
-  .content {
-    flex-grow: 1;
     width: 100%;
-    max-width: 1000px;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
   }
   

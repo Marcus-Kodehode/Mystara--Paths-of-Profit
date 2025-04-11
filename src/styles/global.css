@@ -10,3 +10,17 @@ html, body {
     font-family: 'Cinzel', serif;
   }
   
+  :global(.marketScroll)::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  :global(.marketScroll)::-webkit-scrollbar-thumb {
+    background: #e6ac2a;
+    border-radius: 4px;
+  }
+  
+  :global(.marketScroll) {
+    scrollbar-width: thin;
+    scrollbar-color: #e6ac2a rgba(0, 0, 0, 0.2);
+  }
+  

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // 👈 Routing
 import styles from './GameStart.module.css';
 import GameHUD from '../components/GameHUD';
 import InventoryModal from '../components/InventoryModal';
@@ -20,10 +21,12 @@ const raceIntroductions = {
 function GameStart() {
   const [showIntro, setShowIntro] = useState(true);
   const [isInventoryOpen, setInventoryOpen] = useState(false);
+  const navigate = useNavigate(); // 👈 For å navigere til by
+
   const nickname = localStorage.getItem('playerNickname');
   const selectedRace = localStorage.getItem('selectedRace');
 
-  // Init default stats
+  // Init default stats and inventory on load
   useEffect(() => {
     localStorage.setItem('playerHealth', '100');
     localStorage.setItem('playerStamina', '100');
@@ -38,13 +41,32 @@ function GameStart() {
         { name: "Stamina Potion", type: "consumable" }
       ],
       special: [
-        { name: selectedRace === 'Kavari' ? 'Spice Pack' : selectedRace === 'Dhurak' ? 'Helm of Vitality' : selectedRace === 'Elarin' ? 'Forest Amulet' : 'Jungle Medallion', type: "special" }
+        {
+          name:
+            selectedRace === 'Kavari'
+              ? 'Spice Pack'
+              : selectedRace === 'Dhurak'
+              ? 'Helm of Vitality'
+              : selectedRace === 'Elarin'
+              ? 'Forest Amulet'
+              : 'Jungle Medallion',
+          type: "special"
+        }
       ]
     }));
   }, [selectedRace]);
 
   const handleEnterCity = () => {
-    setShowIntro(false);
+    // Ruter spilleren til riktig startby basert på valgt rase
+    if (selectedRace === 'Kavari') {
+      navigate('/city/thalmoor');
+    } else if (selectedRace === 'Dhurak') {
+      navigate('/city/grumhollow');
+    } else if (selectedRace === 'Elarin') {
+      navigate('/city/sylvarin');
+    } else if (selectedRace === 'Felarii') {
+      navigate('/city/nymrasha');
+    }
   };
 
   const backgroundImage = raceCityBackgrounds[selectedRace] || '';
@@ -61,8 +83,14 @@ function GameStart() {
       className={styles.container}
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
-      <GameHUD playerName={nickname} coins={localStorage.getItem('playerCoins')} health={localStorage.getItem('playerHealth')} stamina={localStorage.getItem('playerStamina')} onInventoryToggle={handleInventoryToggle} />
-      
+      <GameHUD
+        playerName={nickname}
+        coins={localStorage.getItem('playerCoins')}
+        health={localStorage.getItem('playerHealth')}
+        stamina={localStorage.getItem('playerStamina')}
+        onInventoryToggle={handleInventoryToggle}
+      />
+
       {showIntro && (
         <div className={styles.overlay}>
           <h1>Welcome, {nickname}</h1>
