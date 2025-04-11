@@ -1,104 +1,171 @@
 .modalContent {
-    background-color: rgba(0, 0, 0, 0.85);
-    border-radius: 12px;
-    padding: 20px;
-    max-width: 650px; /* Justert bredde for bedre plassbruk */
-    width: 80%;
-    color: #fbeec1;
-    font-family: 'Cinzel Decorative', serif;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
-    position: absolute;
-    top: 10%; /* Justert posisjon for å gi mer plass på toppen */
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 999;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  h2 {
-    font-size: 2rem;
-    margin-bottom: 12px; /* Litt mer plass før overskriften */
-    text-align: center;
-    font-weight: bold;
-    color: #fbeec1;
-  }
-  
-  .category {
-    margin-bottom: 20px; /* Jevnere avstand mellom kategoriene */
-  }
-  
-  .category h3 {
-    font-size: 1.4rem;
-    font-weight: bold;
-    margin-bottom: 10px;
-    text-align: left;
-    color: #fbeec1;
-  }
-  
-  .itemsContainer {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-  }
-  
-  .item {
-    background-color: rgba(255, 255, 255, 0.1);
-    padding: 20px;
-    border-radius: 8px;
-    text-align: center;
-    min-height: 150px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: background-color 0.3s ease;
-  }
-  
-  .item:hover {
-    background-color: #e6ac2a;
-  }
-  
-  .itemName {
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin-bottom: 6px;
-    color: #fbeec1;
-  }
-  
-  .itemEffect {
-    font-size: 1rem;
-    color: #e6ac2a;
-    margin-bottom: 6px;
-  }
-  
-  .itemDescription {
-    font-size: 0.9rem;
-    color: #fbeec1;
-    margin-top: 4px;
-    text-align: left;
-    height: 50px; /* Begrens beskrivelsen til en fast høyde */
-    overflow: hidden;
-  }
-  
-  .closeButton {
-    margin-top: 20px; /* Mindre plass under knappen */
-    background-color: #fcbf49;
-    color: #1a1a1a;
-    font-weight: bold;
-    border: none;
-    border-radius: 8px;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-family: 'Cinzel Decorative', serif;
-    transition: background-color 0.2s ease, transform 0.2s ease;
-    display: block;
-    margin: 0 auto;
-    border: 2px solid #e6ac2a;
-  }
-  
-  .closeButton:hover {
-    background-color: #e6ac2a;
-    transform: scale(1.05);
-  }
-  
+  background: rgba(0, 0, 0, 0.75);
+  background-image: url('/images/Fantasy-scroll.jpg');
+  background-size: cover;
+  background-blend-mode: multiply;
+
+  border-radius: 12px;
+  padding: 16px;
+  max-width: 500px;
+  width: 90%;
+
+  max-height: 80vh; /* begrens høyde for scroll */
+  overflow-y: auto;
+  scrollbar-width: thin;
+
+  color: #fbeec1;
+  font-family: 'Cinzel Decorative', serif;
+
+  box-shadow:
+    inset 0 10px 10px -10px rgba(0, 0, 0, 0.5),
+    inset 0 -10px 10px -10px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(0, 0, 0, 0.6);
+
+  position: absolute;
+  top: 52%; /* litt luft fra toppen */
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+:global(.inventoryScroll)::-webkit-scrollbar {
+  width: 8px;
+}
+
+:global(.inventoryScroll)::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+:global(.inventoryScroll)::-webkit-scrollbar-thumb {
+  background: #e6ac2a;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+:global(.inventoryScroll)::-webkit-scrollbar-thumb:hover {
+  background: #ffd166;
+}
+
+/* Firefox støtte */
+:global(.inventoryScroll) {
+  scrollbar-width: thin;
+  scrollbar-color: #e6ac2a rgba(0, 0, 0, 0.2);
+}
+
+
+/* Title */
+h2 {
+  font-size: 2rem;
+  margin-bottom: 12px;
+  text-align: center;
+  font-weight: bold;
+  color: #fbeec1;
+}
+
+/* Category headers */
+.category {
+  margin-bottom: 20px;
+}
+
+.category h3 {
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: left;
+  color: #fbeec1;
+}
+
+/* Grid of items */
+.itemsContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+/* Item cards */
+.item {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+
+  border: 1px solid rgba(255, 223, 128, 0.3);
+  box-shadow: 0 0 12px rgba(255, 223, 128, 0.1);
+  font-size: 0.85rem;
+  transition: background-color 0.3s ease;
+}
+
+.item:hover {
+  background-color: #e6ac2a;
+}
+
+/* Light shimmer effect */
+.item::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(120deg, transparent, rgba(255,223,128,0.15), transparent);
+  transform: rotate(25deg);
+  pointer-events: none;
+  animation: shimmer 4s infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%) rotate(25deg); }
+  100% { transform: translateX(100%) rotate(25deg); }
+}
+
+/* Text inside items */
+.itemName {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1rem;
+  color: #ffe47a;
+}
+
+.itemEffect {
+  font-size: 0.9rem;
+  color: #ffd166;
+  font-style: italic;
+}
+
+.itemDescription {
+  font-size: 0.75rem;
+  color: #eee;
+  opacity: 0.85;
+  margin-top: 4px;
+  text-align: left;
+}
+
+/* Close button */
+.closeButton {
+  margin: 20px auto 10px auto;
+  background-color: #fcbf49;
+  color: #1a1a1a;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-family: 'Cinzel Decorative', serif;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  border: 2px solid #e6ac2a;
+}
+
+.closeButton:hover {
+  background-color: #e6ac2a;
+  transform: scale(1.05);
+}

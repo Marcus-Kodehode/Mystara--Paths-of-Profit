@@ -29,7 +29,8 @@
 
 .title {
   font-size: 2.5rem;
-  margin-bottom: 25px;
+  margin-bottom: 40px; /* gir luft mellom tittel og grid */
+  margin-top: 20px;     /* skyver den litt ned fra toppen */
   text-shadow: 0 0 8px rgba(255, 223, 128, 0.6);
 }
 
@@ -54,16 +55,17 @@
   }
   
 
-.card {
-  background-color: rgba(5, 5, 10, 0.7);
-  border: 2px solid #fcbf49;
-  border-radius: 12px;
-  padding: 16px;
-  width: 220px; /* mindre bredde */
-  text-align: center;
-  box-shadow: 0 0 20px rgba(255, 223, 128, 0.1);
-  transition: transform 0.2s ease;
-}
+  .card {
+    background-color: rgba(5, 5, 10, 0.7);
+    border: 2px solid #fcbf49;
+    border-radius: 12px;
+    padding: 12px; /* mindre padding */
+    width: 200px;   /* enda litt mindre */
+    text-align: center;
+    box-shadow: 0 0 20px rgba(255, 223, 128, 0.1);
+    transition: transform 0.2s ease;
+  }
+  
 
 .card:hover {
   transform: scale(1.05);
