@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // 👈 Routing
+import { useNavigate } from 'react-router-dom';
 import styles from './GameStart.module.css';
 import GameHUD from '../components/GameHUD';
 import InventoryModal from '../components/InventoryModal';
@@ -12,21 +12,24 @@ const raceCityBackgrounds = {
 };
 
 const raceIntroductions = {
-  Kavari: `Beneath the blazing sun of Thalmoor, the Kavari thrive amidst spice-laden markets and golden domes. Their caravans cross endless dunes, their tongues fluent in coin and contract alike. Welcome to the cradle of desert trade.`,
-  Dhurak: `Among the smoky forges and jagged peaks of Grumhollow, the Dhurak shape both steel and destiny. Their strength is legend, their loyalty unyielding. Your journey begins where stone meets fire.`,
-  Elarin: `Deep within the shimmering Sylvarin woods, the Elarin walk the veil between nature and magic. Enchanted groves hum with secrets, and the spirits of the forest stir. With grace and cunning, your journey begins.`,
-  Felarii: `In the dense jungles of Nym’Rasha, the Felarii move unseen, swift as shadows. Smugglers, spies, and survivors—your kind always finds a way. The law is distant, and your wit is your greatest weapon.`
+  Kavari: `Beneath the blazing sun of Thalmoor, the Kavari have built a golden empire of trade, culture, and cunning. Their cities shimmer with silk and spice, their caravans whisper across the dunes, and every deal is a dance of wit. Born with sand in their veins and silver on their tongues, you begin your journey as a child of the desert—where fortune favors the bold, and every step is a negotiation.`,
+
+  Dhurak: `High in the jagged peaks of Grumhollow, the Dhurak thrive in smoke and stone. Forged in fire and tempered by battle, these mountainfolk carve their destinies with hammers and runes. Their strength is legendary, their loyalty unshakable. You enter a world where might is currency, the anvil is sacred, and every clang of metal echoes a tale of endurance. Your journey begins where stone meets will.`,
+
+  Elarin: `Hidden within the timeless glades of Sylvarin, the Elarin walk the line between beauty and power. Their cities grow from ancient trees, and magic flows through root and river alike. Attuned to the whispers of the forest and the pull of unseen forces, they see the world not as it is, but as it could be. You awaken among starlit groves, where spirits stir, and destiny is drawn in moonlight.`,
+
+  Felarii: `In the tangled wilds of Nym’Rasha, the Felarii slip between shadow and sun. Agile, elusive, and steeped in mystery, these feline nomads make their homes atop beasts and among shifting roots. They trade in secrets and vanish without trace. You begin your journey not on roads, but across forgotten trails—where trust is rare, instincts rule, and freedom lies just beyond the next jungle bend.`
 };
 
-function GameStart() {
+
+function GameStart({ audioRef }) {
   const [showIntro, setShowIntro] = useState(true);
   const [isInventoryOpen, setInventoryOpen] = useState(false);
-  const navigate = useNavigate(); // 👈 For å navigere til by
+  const navigate = useNavigate();
 
   const nickname = localStorage.getItem('playerNickname');
   const selectedRace = localStorage.getItem('selectedRace');
 
-  // Init default stats and inventory on load
   useEffect(() => {
     localStorage.setItem('playerHealth', '100');
     localStorage.setItem('playerStamina', '100');
@@ -57,16 +60,14 @@ function GameStart() {
   }, [selectedRace]);
 
   const handleEnterCity = () => {
-    // Ruter spilleren til riktig startby basert på valgt rase
-    if (selectedRace === 'Kavari') {
-      navigate('/city/thalmoor');
-    } else if (selectedRace === 'Dhurak') {
-      navigate('/city/grumhollow');
-    } else if (selectedRace === 'Elarin') {
-      navigate('/city/sylvarin');
-    } else if (selectedRace === 'Felarii') {
-      navigate('/city/nymrasha');
+    if (audioRef?.current) {
+      audioRef.current.pause(); // 🔇 Stop musikken når byen åpnes
     }
+
+    if (selectedRace === 'Kavari') navigate('/city/thalmoor');
+    else if (selectedRace === 'Dhurak') navigate('/city/grumhollow');
+    else if (selectedRace === 'Elarin') navigate('/city/sylvarin');
+    else if (selectedRace === 'Felarii') navigate('/city/nymrasha');
   };
 
   const backgroundImage = raceCityBackgrounds[selectedRace] || '';

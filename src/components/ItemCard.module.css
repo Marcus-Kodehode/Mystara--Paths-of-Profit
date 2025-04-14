@@ -1,0 +1,85 @@
+.card {
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 1px solid #fcbf49;
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+    transition: box-shadow 0.2s ease;
+    font-family: 'Cinzel Decorative', serif;
+    color: #fbeec1;
+  }
+  
+  /* Flash-effekt */
+  .flash {
+    box-shadow: 0 0 20px #ffe57f, 0 0 30px #ffc107 inset;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .market {
+    width: 190px;
+  }
+  
+  .inventory {
+    width: 100%;
+    max-width: 240px;
+    min-height: 180px;
+  }
+  
+  .itemImage {
+    width: 100%;
+    height: 110px;
+    object-fit: contain; /* 👈 Viktig: bytter fra 'cover' til 'contain' */
+    border-radius: 6px;
+    margin-bottom: 8px;
+    display: block;
+    border: 1px solid rgba(252, 191, 73, 0.3);
+    background-color: rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  }
+  
+  
+  .name {
+    font-weight: bold;
+    font-size: 1rem;
+    color: #fff3c1;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+  }
+  
+  .effect {
+    font-size: 0.9rem;
+    color: #ffe57f;
+    font-weight: bold;
+    margin-bottom: 4px;
+  }
+  
+  .description {
+    font-size: 0.85rem;
+    line-height: 1.2;
+    color: #fdf3c1;
+    margin-bottom: 6px;
+  }
+  
+  .price {
+    font-style: italic;
+    color: #fcbf49;
+    font-size: 0.9rem;
+    margin-bottom: 6px;
+  }
+  
+  .actionButton {
+    background-color: #fcbf49;
+    color: #1a1a1a;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .actionButton:hover {
+    background-color: #ffd166;
+  }
+  

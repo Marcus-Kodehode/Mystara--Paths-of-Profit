@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './RaceSelect.module.css';
 
@@ -17,7 +17,7 @@ const races = [
     description: 'Mountain dwellers with unmatched strength and craftsmanship.',
     traits: [
       { type: 'positive', text: 'Better prices for metal and weapon items' },
-      { type: 'positive', text: 'Increased health or durability' },
+      { type: 'positive', text: 'Increased health' },
       { type: 'negative', text: 'Slower travel speed between towns' }
     ]
   },
@@ -26,7 +26,7 @@ const races = [
     description: 'Mystical elves in harmony with the forest and magic.',
     traits: [
       { type: 'positive', text: 'Better chance for positive travel events' },
-      { type: 'positive', text: 'Can carry one extra item' },
+      { type: 'positive', text: 'Increased travel speed between towns' },
       { type: 'negative', text: 'Worse prices outside Elarin regions' }
     ]
   },
@@ -45,6 +45,19 @@ function RaceSelect() {
   const [selectedRace, setSelectedRace] = useState(null);
   const [nickname, setNickname] = useState('');
   const navigate = useNavigate();
+  const audioRef = useRef(null);
+
+  // Start temamusikk når RaceSelect mounts
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (audio) {
+      audio.volume = 0.5;
+      audio
+        .play()
+        .then(() => console.log('Theme music started in RaceSelect'))
+        .catch((err) => console.warn('Audio play error in RaceSelect:', err));
+    }
+  }, []);
 
   const handleRaceSelect = (raceName) => {
     setSelectedRace(raceName);
@@ -53,14 +66,19 @@ function RaceSelect() {
 
   const handleConfirm = () => {
     if (!nickname.trim()) return;
-
     localStorage.setItem('selectedRace', selectedRace);
     localStorage.setItem('playerNickname', nickname);
-    navigate('/start'); // Neste steg i spillet
+    // Naviger videre til GameStart (musikk stoppes eventuelt i GameStart, avhengig av implementasjon)
+    navigate('/start');
   };
 
   return (
     <div className={styles.container}>
+      {/* Global temamusikk for RaceSelect */}
+      <audio ref={audioRef} loop>
+        <source src="/sounds/theme.mp3" type="audio/mpeg" />
+      </audio>
+
       <div className={styles.coinsContainer}>
         {[...Array(25)].map((_, i) => (
           <img

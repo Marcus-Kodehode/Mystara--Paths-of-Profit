@@ -1,94 +1,80 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './InventoryModal.module.css';
+import allItems from '../data/items'; // ✅ Går ett nivå opp til data
+import ItemCard from './ItemCard'; // ✅ Ligger i samme mappe (components)
+
 
 const InventoryModal = ({ items, onClose }) => {
+  const [usedItem, setUsedItem] = useState(null);
+
+  const handleUse = (item) => {
+    // Dummy-effekt nå – her kan du implementere effekter som +50 HP osv.
+    setUsedItem(item.name);
+    setTimeout(() => setUsedItem(null), 1000);
+
+    // Fjern item etter bruk
+    const currentInventory = JSON.parse(localStorage.getItem('playerInventory')) || {
+      items: [],
+      consumables: [],
+      special: [],
+    };
+
+    const updatedConsumables = currentInventory.consumables.filter(i => i !== item);
+    currentInventory.consumables = updatedConsumables;
+    localStorage.setItem('playerInventory', JSON.stringify(currentInventory));
+  };
+
   return (
     <div className={styles.modalOverlay}>
       <div className={`${styles.modalContent} inventoryScroll`}>
-        <h2>Inventory</h2>
+        <h2 className={styles.title}>Inventory</h2>
 
-        {/* Items Category */}
+        {/* ITEMS */}
         <div className={styles.category}>
-          <h3>ITEMS</h3>
-          <div className={styles.itemsContainer}>
+          <h3>Items</h3>
+          <div className={styles.grid}>
             {items.items.map((item, index) => (
-              <div key={index} className={styles.item}>
-                <div className={styles.itemName}>{item.name}</div>
-                <div className={styles.itemEffect}>
-                  {item.name === 'Rusty Sword'
-                    ? 'Deals 10 damage'
-                    : item.name === 'Leather Tunic'
-                    ? 'Provides basic protection'
-                    : null}
-                </div>
-                <div className={styles.itemDescription}>
-                  {item.name === 'Rusty Sword'
-                    ? 'This is a very dull blade, could hardly hurt anyone.'
-                    : item.name === 'Leather Tunic'
-                    ? 'A simple piece of armor that offers minimal protection.'
-                    : null}
-                </div>
-              </div>
+              <ItemCard
+                key={index}
+                item={item}
+                itemData={allItems[item.name]}
+                isSell={false}
+              />
             ))}
           </div>
         </div>
 
-        {/* Consumables Category */}
+        {/* CONSUMABLES */}
         <div className={styles.category}>
-          <h3>CONSUMABLES</h3>
-          <div className={styles.itemsContainer}>
+          <h3>Consumables</h3>
+          <div className={styles.grid}>
             {items.consumables.map((item, index) => (
-              <div key={index} className={styles.item}>
-                <div className={styles.itemName}>{item.name}</div>
-                <div className={styles.itemEffect}>
-                  {item.name === 'Health Potion'
-                    ? 'Restores 50 health'
-                    : item.name === 'Stamina Potion'
-                    ? 'Restores 50 stamina'
-                    : null}
-                </div>
-                <div className={styles.itemDescription}>
-                  {item.name === 'Health Potion'
-                    ? 'A lifeline in battle, restores health.'
-                    : item.name === 'Stamina Potion'
-                    ? 'Helps you move faster, restores stamina.'
-                    : null}
-                </div>
-              </div>
+              <ItemCard
+                key={index}
+                item={item}
+                itemData={allItems[item.name]}
+                isSell={false}
+                onAction={handleUse}
+                actionLabel={usedItem === item.name ? 'Used!' : 'Use'}
+              />
             ))}
           </div>
         </div>
 
-{/* Special Items Category */}
-<div className={styles.category}>
-  <h3>SPECIAL ITEMS</h3>
-  <div className={styles.itemsContainer}>
-    {items.special.map((item, index) => (
-      <div key={index} className={styles.item}>
-        <div className={styles.itemName}>{item.name}</div>
-        <div className={styles.itemEffect}>
-          {item.name === 'Spice Pack' ? 'Can be sold for double its value in Kavari settlements.' :
-           item.name === 'Helm of Vitality' ? 'Restores 25–50 health upon arriving in a new settlement.' :
-           item.name === 'Forest Amulet' ? 'Increases both stamina and health by 25.' :
-           item.name === 'Jungle Medallion' ? 'Effect unknown.' :
-           null}
+        {/* SPECIAL ITEMS */}
+        <div className={styles.category}>
+          <h3>Special Items</h3>
+          <div className={styles.grid}>
+            {items.special.map((item, index) => (
+              <ItemCard
+                key={index}
+                item={item}
+                itemData={allItems[item.name]}
+                isSell={false}
+              />
+            ))}
+          </div>
         </div>
-        <div className={styles.itemDescription}>
-          {item.name === 'Spice Pack'
-            ? 'A fragrant collection of rare desert spices, cherished by merchants across the dunes. In Kavari markets, these scents awaken memories—and open purses.'
-            : item.name === 'Helm of Vitality'
-            ? 'A relic of the forge-kin, this helm pulses with ancestral strength. Those who wear it feel a warm surge of resilience each time they reach safety.'
-            : item.name === 'Forest Amulet'
-            ? 'Woven from enchanted ivy and silver blessed under starlight, this amulet radiates calm and vitality. It strengthens the bond between body and nature.'
-            : item.name === 'Jungle Medallion'
-            ? 'An old Felarii token etched with forgotten symbols. Traders speak in hushed tones of those who carry it returning safely from treacherous journeys... but none know exactly why.'
-            : null}
-        </div>
-      </div>
-    ))}
-  </div>
-</div>
-
 
         <button className={styles.closeButton} onClick={onClose}>
           Close

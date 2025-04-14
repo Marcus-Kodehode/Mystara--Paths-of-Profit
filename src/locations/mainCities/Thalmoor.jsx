@@ -28,9 +28,17 @@ const Thalmoor = () => {
     };
   }, []);
 
-  const handleMarketOpen = () => setMarketOpen(true);
-  const handleMarketClose = () => setMarketOpen(false);
-  const handleInventoryToggle = () => setInventoryOpen(!isInventoryOpen);
+  const handleMarketOpen = () => {
+    setMarketOpen(true);
+  };
+
+  const handleMarketClose = () => {
+    setMarketOpen(false);
+  };
+
+  const handleInventoryToggle = () => {
+    setInventoryOpen(!isInventoryOpen);
+  };
 
   return (
     <>
@@ -38,7 +46,6 @@ const Thalmoor = () => {
         <source src="/sounds/kavari-city.mp3" type="audio/mpeg" />
       </audio>
 
-      {/* Plasser GameHUD utenfor CityLayout for korrekt posisjonering */}
       <GameHUD
         playerName={nickname}
         coins={coins}
@@ -52,7 +59,6 @@ const Thalmoor = () => {
         description=""
         backgroundImage="/images/Thalmoor3.png"
       >
-        {/* Byens tittel og beskrivelse */}
         <div className={styles.cityHeader}>
           <h1 className={styles.cityName}>Thalmoor</h1>
           <p className={styles.cityDescription}>
@@ -60,7 +66,7 @@ const Thalmoor = () => {
           </p>
         </div>
 
-        {/* Marked-hotspot */}
+        {/* Kun én knapp for markedet */}
         <div
           className={styles.marketHotspot}
           onClick={handleMarketOpen}
@@ -69,13 +75,15 @@ const Thalmoor = () => {
           Enter Market
         </div>
 
-        {/* Inventory modal */}
+        {/* Inventory-knapp fra HUD åpner vanlig InventoryModal */}
         {isInventoryOpen && (
           <InventoryModal items={items} onClose={handleInventoryToggle} />
         )}
 
-        {/* Market modal */}
-        {isMarketOpen && <MarketModal city="Thalmoor" onClose={handleMarketClose} />}
+        {/* Åpner begge modalene når man går til markedet */}
+        {isMarketOpen && (
+          <MarketModal city="Thalmoor" onClose={handleMarketClose} />
+        )}
       </CityLayout>
     </>
   );

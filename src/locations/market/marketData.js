@@ -21,21 +21,21 @@ const marketData = {
         { name: 'Iron Ore', price: 110 },
         { name: 'Forged Blade', price: 200 }
       ],
-      specialItem: { name: 'Runed Pickaxe', price: 300 }
+      specialItem: { name: 'Runed Pickaxe', price: 3000 }
     },
     Sylvarin: {
       tradeGoods: [
         { name: 'Enchanted Leaf', price: 95 },
         { name: 'Moonblossom', price: 130 }
       ],
-      specialItem: { name: 'Elven Songstone', price: 275 }
+      specialItem: { name: 'Elven Songstone', price: 2750 }
     },
     NymRasha: {
       tradeGoods: [
         { name: 'Shadow Fern', price: 105 },
         { name: 'Beast Fang', price: 115 }
       ],
-      specialItem: { name: 'Felarii Talisman', price: 280 }
+      specialItem: { name: 'Felarii Talisman', price: 2800 }
     }
   };
   
