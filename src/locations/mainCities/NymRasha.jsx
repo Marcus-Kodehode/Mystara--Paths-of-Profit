@@ -43,7 +43,7 @@ const NymRasha = () => {
   return (
     <>
       <audio ref={audioRef} loop>
-        <source src="/sounds/nymrasha-theme.mp3" type="audio/mpeg" />
+        <source src="/sounds/felarii-city.mp3" type="audio/mpeg" />
       </audio>
 
       <GameHUD

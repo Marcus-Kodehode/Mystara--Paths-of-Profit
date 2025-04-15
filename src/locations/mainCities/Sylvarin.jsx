@@ -54,7 +54,7 @@ const Sylvarin = () => {
   return (
     <>
       <audio ref={audioRef} loop>
-        <source src="/sounds/sylvarin-theme.mp3" type="audio/mpeg" />
+        <source src="/sounds/elarin-city.mp3" type="audio/mpeg" />
       </audio>
 
       <GameHUD
