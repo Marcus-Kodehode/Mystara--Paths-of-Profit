@@ -65,4 +65,27 @@
   .modalContent::-webkit-scrollbar-thumb:hover {
     background-color: #e6ac2a;
   }
+  .travelHotspot {
+    position: absolute;
+    top: 95%;       /* Juster etter kartets layout */
+    left: 50%;      /* Juster etter kartets layout */
+    transform: translate(-50%, -50%);
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fcbf49;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 5px 10px;
+    border-radius: 10px;
+    border: 2px solid #fcbf49;
+    cursor: pointer;
+    font-family: 'Cinzel Decorative', serif;
+    z-index: 10;
+    transition: all 0.2s ease;
+  }
+  
+  .travelHotspot:hover {
+    background-color: #fcbf49;
+    color: #1a1a1a;
+    transform: translate(-50%, -50%) scale(1.05);
+  }
   

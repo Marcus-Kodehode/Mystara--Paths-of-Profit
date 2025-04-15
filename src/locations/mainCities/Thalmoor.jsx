@@ -1,14 +1,18 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import CityLayout from '../shared/CityLayout';
 import styles from './Thalmoor.module.css';
 import GameHUD from '../../components/GameHUD';
 import InventoryModal from '../../components/InventoryModal';
 import MarketModal from '../market/MarketModal';
+import TravelModal from '../../components/travel/TravelModal';
 
 const Thalmoor = () => {
   const audioRef = useRef(null);
   const [isMarketOpen, setMarketOpen] = useState(false);
   const [isInventoryOpen, setInventoryOpen] = useState(false);
+  const [isTravelOpen, setTravelOpen] = useState(false);
+  const navigate = useNavigate();
 
   const nickname = localStorage.getItem('playerNickname');
   const health = localStorage.getItem('playerHealth');
@@ -22,22 +26,18 @@ const Thalmoor = () => {
       audio.volume = 0.5;
       audio.play().catch((err) => console.warn('Autoplay failed:', err));
     }
-
     return () => {
       if (audio) audio.pause();
     };
   }, []);
 
-  const handleMarketOpen = () => {
-    setMarketOpen(true);
-  };
-
-  const handleMarketClose = () => {
-    setMarketOpen(false);
-  };
-
-  const handleInventoryToggle = () => {
-    setInventoryOpen(!isInventoryOpen);
+  const handleMarketOpen = () => setMarketOpen(true);
+  const handleMarketClose = () => setMarketOpen(false);
+  const handleInventoryToggle = () => setInventoryOpen(!isInventoryOpen);
+  const handleTravelOpen = () => setTravelOpen(true);
+  const handleTravelClose = () => setTravelOpen(false);
+  const handleTravel = (path) => {
+    navigate(path);
   };
 
   return (
@@ -66,7 +66,6 @@ const Thalmoor = () => {
           </p>
         </div>
 
-        {/* Kun én knapp for markedet */}
         <div
           className={styles.marketHotspot}
           onClick={handleMarketOpen}
@@ -75,14 +74,26 @@ const Thalmoor = () => {
           Enter Market
         </div>
 
-        {/* Inventory-knapp fra HUD åpner vanlig InventoryModal */}
+        <div
+          className={styles.travelHotspot}
+          onClick={handleTravelOpen}
+          title="Begin Journey"
+        >
+          Begin Journey
+        </div>
+
         {isInventoryOpen && (
           <InventoryModal items={items} onClose={handleInventoryToggle} />
         )}
-
-        {/* Åpner begge modalene når man går til markedet */}
         {isMarketOpen && (
           <MarketModal city="Thalmoor" onClose={handleMarketClose} />
+        )}
+        {isTravelOpen && (
+          <TravelModal
+            city="Thalmoor"
+            onClose={handleTravelClose}
+            onTravel={handleTravel} // ✅ Denne linjen er avgjørende
+          />
         )}
       </CityLayout>
     </>

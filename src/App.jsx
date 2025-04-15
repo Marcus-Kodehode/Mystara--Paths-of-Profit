@@ -8,6 +8,10 @@ import Grumhollow from './locations/mainCities/Grumhollow';
 import Sylvarin from './locations/mainCities/Sylvarin';
 import NymRasha from './locations/mainCities/NymRasha';
 import AudioContext from './locations/shared/AudioContext';
+import RedBasin from './locations/lesserLocations/RedBasin';
+import Runebreak from './locations/lesserLocations/Runebreak';
+import IrvathGlade from './locations/lesserLocations/IrvathGlade';
+import QuickfangHollow from './locations/lesserLocations/QuickfangHollow';
 
 
 function AudioProvider({ children }) {
@@ -56,6 +60,10 @@ function AppRoutes() {
       <Route path="/city/grumhollow" element={<Grumhollow />} />
       <Route path="/city/sylvarin" element={<Sylvarin />} />
       <Route path="/city/nymrasha" element={<NymRasha />} />
+      <Route path="/lesser/redbasin" element={<RedBasin />} />
+      <Route path="/lesser/runebreak" element={<Runebreak />} />
+      <Route path="/lesser/irvathglade" element={<IrvathGlade />} />
+      <Route path="/lesser/quickfanghollow" element={<QuickfangHollow />} />
     </Routes>
   );
 }
