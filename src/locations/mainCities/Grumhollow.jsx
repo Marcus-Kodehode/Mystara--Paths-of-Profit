@@ -59,12 +59,13 @@ const Grumhollow = () => {
         description=""
         backgroundImage="/images/Grumhollow3.png"
       >
-        <div className={styles.cityHeader}>
-          <h1 className={styles.cityName}>Thalmoor</h1>
-          <p className={styles.cityDescription}>
-            The desert jewel of the Kavari—a place where coins speak louder than swords.
-          </p>
-        </div>
+<div className={styles.cityHeader}>
+  <h1 className={styles.cityName}>Grumhollow</h1>
+  <p className={styles.cityDescription}>
+    Deep within the Drakthar Peaks, the forges of the Dhurak burn eternal. Steel, stone, and stubborn pride shape every breath of life here.
+  </p>
+</div>
+
 
         {/* Kun én knapp for markedet */}
         <div

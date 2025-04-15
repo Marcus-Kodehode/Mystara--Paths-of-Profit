@@ -5,6 +5,8 @@ import RaceSelect from './screens/RaceSelect';
 import GameStart from './screens/GameStart';
 import Thalmoor from './locations/mainCities/Thalmoor';
 import Grumhollow from './locations/mainCities/Grumhollow';
+import Sylvarin from './locations/mainCities/Sylvarin';
+import NymRasha from './locations/mainCities/NymRasha';
 import AudioContext from './locations/shared/AudioContext';
 
 
@@ -52,6 +54,8 @@ function AppRoutes() {
       <Route path="/start" element={<GameStart />} />
       <Route path="/city/thalmoor" element={<Thalmoor />} />
       <Route path="/city/grumhollow" element={<Grumhollow />} />
+      <Route path="/city/sylvarin" element={<Sylvarin />} />
+      <Route path="/city/nymrasha" element={<NymRasha />} />
     </Routes>
   );
 }
