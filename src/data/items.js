@@ -37,7 +37,7 @@ const items = {
       name: "Health Potion",
       type: "consumable",
       price: 50,
-      image: "/images/items/health-potion.png",
+      image: "/images/items/health-potion.webp",
       description: "Restores 50 health when used.",
       usable: true,
       effect: "+50 Health"
@@ -46,7 +46,7 @@ const items = {
       name: "Stamina Potion",
       type: "consumable",
       price: 50,
-      image: "/images/items/stamina-potion.png",
+      image: "/images/items/stamina-potion.webp",
       description: "Restores 50 stamina when used.",
       usable: true,
       effect: "+50 Stamina"
@@ -57,7 +57,7 @@ const items = {
       name: "Spice Pack",
       type: "trade",
       price: 200,
-      image: "/images/items/spice-pack.png",
+      image: "/images/items/spice-pack.webp",
       description: "A fragrant collection of rare desert spices, cherished by merchants across the dunes.",
       lore: "Can be sold for double its value in Kavari settlements.",
       sellMultiplier: 2
@@ -66,7 +66,7 @@ const items = {
       name: "Silk Bundle",
       type: "trade",
       price: 100,
-      image: "/images/items/silk-bundle.png",
+      image: "/images/items/silk-bundle.webp",
       description: "Exotic silk gathered from distant lands. Elegant and expensive.",
     },
     "Iron Ore": {
@@ -117,7 +117,7 @@ const items = {
       name: "Desert Compass",
       type: "special",
       price: 2500,
-      image: "/images/items/desert-compass.png",
+      image: "/images/items/desert-compass.webp",
       description: "A mystical compass that always points toward lost ruins in the sands.",
       lore: "Vital for navigating the Great Dune beyond Thalmoor.",
     },
@@ -148,7 +148,7 @@ const items = {
     "Helm of Vitality": {
       name: "Helm of Vitality",
       type: "special",
-      price: 0,
+      price: 250,
       image: "/images/items/helm-of-vitality.png",
       description: "Restores 25–50 health upon arriving in a new settlement.",
       lore: "A relic of the forge-kin, this helm pulses with ancestral strength. Those who wear it feel a warm surge of resilience each time they reach safety.",
@@ -156,7 +156,7 @@ const items = {
     "Forest Amulet": {
       name: "Forest Amulet",
       type: "special",
-      price: 0,
+      price: 250,
       image: "/images/items/forest-amulet.png",
       description: "Increases both stamina and health by 25.",
       lore: "Woven from enchanted ivy and silver blessed under starlight, this amulet radiates calm and vitality. It strengthens the bond between body and nature.",
@@ -164,7 +164,7 @@ const items = {
     "Jungle Medallion": {
       name: "Jungle Medallion",
       type: "special",
-      price: 0,
+      price: 250,
       image: "/images/items/jungle-medallion.png",
       description: "Effect unknown.",
       lore: "An old Felarii token etched with forgotten symbols. Traders speak in hushed tones of those who carry it returning safely from treacherous journeys... but none know exactly why.",

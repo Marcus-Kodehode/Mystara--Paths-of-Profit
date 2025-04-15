@@ -1,0 +1,68 @@
+.marketHotspot {
+    position: absolute;
+    top: 67%;       /* 🔽 flyttet oppover */
+    left: 28%;    /* 🔙 flyttet mot venstre */
+    transform: translate(-50%, -50%);
+    font-size: 1rem;   /* 🔍 litt mindre nå */
+    font-weight: bold;
+    color: #fcbf49;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 5px 10px;
+    border-radius: 10px;
+    border: 2px solid #fcbf49;
+    cursor: pointer;
+    font-family: 'Cinzel Decorative', serif;
+    z-index: 10;
+    transition: all 0.2s ease;
+  }
+  
+  .marketHotspot:hover {
+    background-color: #fcbf49;
+    color: #1a1a1a;
+    transform: translate(-50%, -50%) scale(1.05);
+  }
+   
+  .cityHeader {
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: #fbeec1;
+    z-index: 5;
+  }
+  
+  .cityName {
+    font-size: 3rem;
+    font-family: 'Cinzel Decorative', serif;
+    color: #fdf3c1;
+    text-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+    margin-bottom: 4px;
+  }
+  
+  .cityDescription {
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+    opacity: 0.85;
+    font-family: 'Cinzel Decorative', serif;
+  }
+  .modalContent::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .modalContent::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+  }
+  
+  .modalContent::-webkit-scrollbar-thumb {
+    background-color: #fcbf49;
+    border-radius: 10px;
+    border: 2px solid rgba(0, 0, 0, 0.3);
+  }
+  
+  .modalContent::-webkit-scrollbar-thumb:hover {
+    background-color: #e6ac2a;
+  }
+  

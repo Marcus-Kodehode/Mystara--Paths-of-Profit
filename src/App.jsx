@@ -4,7 +4,9 @@ import StartScreen from './screens/StartScreen';
 import RaceSelect from './screens/RaceSelect';
 import GameStart from './screens/GameStart';
 import Thalmoor from './locations/mainCities/Thalmoor';
+import Grumhollow from './locations/mainCities/Grumhollow';
 import AudioContext from './locations/shared/AudioContext';
+
 
 function AudioProvider({ children }) {
   const audioRef = useRef(new Audio('/sounds/theme.mp3'));
@@ -49,6 +51,7 @@ function AppRoutes() {
       <Route path="/select-race" element={<RaceSelect />} />
       <Route path="/start" element={<GameStart />} />
       <Route path="/city/thalmoor" element={<Thalmoor />} />
+      <Route path="/city/grumhollow" element={<Grumhollow />} />
     </Routes>
   );
 }
