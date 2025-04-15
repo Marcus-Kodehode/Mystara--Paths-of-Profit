@@ -57,7 +57,7 @@ const QuickfangHollow = () => {
       <CityLayout
         cityName=""
         description=""
-        backgroundImage="/public/images/quickfang-hollow.webp"
+        backgroundImage="/images/quickfang-hollow.webp"
       >
         <div className={styles.cityHeader}>
           <h1 className={styles.cityName}>Quickfang Hollow</h1>
