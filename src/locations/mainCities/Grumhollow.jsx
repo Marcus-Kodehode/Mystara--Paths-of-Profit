@@ -1,33 +1,29 @@
 // src/locations/mainCities/Grumhollow.jsx
 
 import React, { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // ⬅️ nødvendig for å navigere ved reise
+import { useNavigate } from 'react-router-dom';
 import CityLayout from '../shared/CityLayout';
 import styles from './Grumhollow.module.css';
 import GameHUD from '../../components/GameHUD';
 import InventoryModal from '../../components/InventoryModal';
 import MarketModal from '../market/MarketModal';
-
-// 🧭 NYTT – importerer TravelModal
 import TravelModal from '../../components/travel/TravelModal';
 
 const Grumhollow = () => {
   const audioRef = useRef(null);
-  const navigate = useNavigate(); // 👈 brukes når spiller velger reise
+  const navigate = useNavigate();
 
-  // 📦 STATE – modaler og UI
   const [isMarketOpen, setMarketOpen] = useState(false);
   const [isInventoryOpen, setInventoryOpen] = useState(false);
-  const [isTravelOpen, setTravelOpen] = useState(false); // 🧭 NYTT – reisevalg modal
+  const [isTravelOpen, setTravelOpen] = useState(false);
+  const [showIntro, setShowIntro] = useState(false);
 
-  // 📜 HENTER SPILLERDATA
   const nickname = localStorage.getItem('playerNickname');
   const health = localStorage.getItem('playerHealth');
   const stamina = localStorage.getItem('playerStamina');
   const coins = localStorage.getItem('playerCoins');
   const items = JSON.parse(localStorage.getItem('playerInventory')) || {};
 
-  // 🔊 SPILL AV BAKGRUNNSMUSIKK
   useEffect(() => {
     const audio = audioRef.current;
     if (audio) {
@@ -35,32 +31,30 @@ const Grumhollow = () => {
       audio.play().catch((err) => console.warn('Autoplay failed:', err));
     }
 
+    const hasVisited = localStorage.getItem('visitedGrumhollow');
+    if (!hasVisited) {
+      setShowIntro(true);
+      localStorage.setItem('visitedGrumhollow', 'true');
+    }
+
     return () => {
       if (audio) audio.pause();
     };
   }, []);
 
-  // 📦 MODAL-HÅNDTERING
   const handleMarketOpen = () => setMarketOpen(true);
   const handleMarketClose = () => setMarketOpen(false);
   const handleInventoryToggle = () => setInventoryOpen(!isInventoryOpen);
-
-  // 🧭 REISE-HÅNDTERING
-  const handleTravelOpen = () => setTravelOpen(true);          // Åpner reisevalg
-  const handleTravelClose = () => setTravelOpen(false);        // Lukker modal
-  const handleTravel = (path) => {                             // Navigerer ved valg
-    setTravelOpen(false);
-    navigate(path);
-  };
+  const handleTravelOpen = () => setTravelOpen(true);
+  const handleTravelClose = () => setTravelOpen(false);
+  const handleTravel = (path) => navigate(path);
 
   return (
     <>
-      {/* 🎵 MUSIKK */}
       <audio ref={audioRef} loop>
         <source src="/sounds/dhurak-city.mp3" type="audio/mpeg" />
       </audio>
 
-      {/* 🧍 HUD */}
       <GameHUD
         playerName={nickname}
         coins={coins}
@@ -69,13 +63,11 @@ const Grumhollow = () => {
         onInventoryToggle={handleInventoryToggle}
       />
 
-      {/* 🌆 BY-LAYOUT */}
       <CityLayout
         cityName=""
         description=""
         backgroundImage="/images/Grumhollow3.png"
       >
-        {/* 🏙️ HEADER */}
         <div className={styles.cityHeader}>
           <h1 className={styles.cityName}>Grumhollow</h1>
           <p className={styles.cityDescription}>
@@ -83,7 +75,6 @@ const Grumhollow = () => {
           </p>
         </div>
 
-        {/* 🛒 MARKET */}
         <div
           className={styles.marketHotspot}
           onClick={handleMarketOpen}
@@ -92,21 +83,19 @@ const Grumhollow = () => {
           Enter Market
         </div>
 
-        {/* 🧭 TRAVEL (🆕 NY) */}
         <div
           className={styles.travelHotspot}
           onClick={handleTravelOpen}
-          title="Travel to another location"
+          title="Begin Journey"
         >
           Begin Journey
         </div>
 
-        {/* MODALS */}
-        {isInventoryOpen && (
-          <InventoryModal items={items} onClose={handleInventoryToggle} />
-        )}
         {isMarketOpen && (
           <MarketModal city="Grumhollow" onClose={handleMarketClose} />
+        )}
+        {isInventoryOpen && (
+          <InventoryModal items={items} onClose={handleInventoryToggle} />
         )}
         {isTravelOpen && (
           <TravelModal
@@ -114,6 +103,20 @@ const Grumhollow = () => {
             onClose={handleTravelClose}
             onTravel={handleTravel}
           />
+        )}
+
+        {showIntro && (
+          <div className={styles.introModal}>
+            <div className={styles.introContent}>
+              <h2>Welcome to Grumhollow</h2>
+              <p>
+                Beneath mountains carved by time and fire, the Dhurak dwarves mine, forge, and defend their legacy. Grumhollow echoes with hammers and old grudges.
+              </p>
+              <button className={styles.closeButton} onClick={() => setShowIntro(false)}>
+                Continue
+              </button>
+            </div>
+          </div>
         )}
       </CityLayout>
     </>

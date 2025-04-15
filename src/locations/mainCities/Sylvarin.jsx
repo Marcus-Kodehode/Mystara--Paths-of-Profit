@@ -1,28 +1,29 @@
+// src/locations/mainCities/Sylvarin.jsx
+
 import React, { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import CityLayout from '../shared/CityLayout';
 import styles from './Sylvarin.module.css';
 import GameHUD from '../../components/GameHUD';
 import InventoryModal from '../../components/InventoryModal';
 import MarketModal from '../market/MarketModal';
-import TravelModal from '../../components/travel/TravelModal'; // ✅ Riktig path
+import TravelModal from '../../components/travel/TravelModal';
 
 const Sylvarin = () => {
-  // 🔊 Lydreferanse
   const audioRef = useRef(null);
+  const navigate = useNavigate();
 
-  // 📦 UI State
   const [isMarketOpen, setMarketOpen] = useState(false);
   const [isInventoryOpen, setInventoryOpen] = useState(false);
-  const [isTravelOpen, setTravelOpen] = useState(false); // ✨ NYTT
+  const [isTravelOpen, setTravelOpen] = useState(false);
+  const [showIntro, setShowIntro] = useState(false);
 
-  // 🧍 Spillerdata
   const nickname = localStorage.getItem('playerNickname');
   const health = localStorage.getItem('playerHealth');
   const stamina = localStorage.getItem('playerStamina');
   const coins = localStorage.getItem('playerCoins');
   const items = JSON.parse(localStorage.getItem('playerInventory')) || {};
 
-  // 🎵 Spille bakgrunnsmusikk
   useEffect(() => {
     const audio = audioRef.current;
     if (audio) {
@@ -30,26 +31,32 @@ const Sylvarin = () => {
       audio.play().catch((err) => console.warn('Autoplay failed:', err));
     }
 
+    const hasVisited = localStorage.getItem('visitedSylvarin');
+    if (!hasVisited) {
+      setShowIntro(true);
+      localStorage.setItem('visitedSylvarin', 'true');
+    }
+
     return () => {
       if (audio) audio.pause();
     };
   }, []);
 
-  // 🧭 Håndter modaler
   const handleMarketOpen = () => setMarketOpen(true);
   const handleMarketClose = () => setMarketOpen(false);
   const handleInventoryToggle = () => setInventoryOpen(!isInventoryOpen);
-  const handleTravelOpen = () => setTravelOpen(true);         // ✨ NY
-  const handleTravelClose = () => setTravelOpen(false);       // ✨ NY
+  const handleTravelOpen = () => setTravelOpen(true);
+  const handleTravelClose = () => setTravelOpen(false);
+  const handleTravel = (path) => {
+    navigate(path);
+  };
 
   return (
     <>
-      {/* 🎵 Musikk */}
       <audio ref={audioRef} loop>
-        <source src="/sounds/elarin-city.mp3" type="audio/mpeg" />
+        <source src="/sounds/sylvarin-theme.mp3" type="audio/mpeg" />
       </audio>
 
-      {/* 🧍 HUD */}
       <GameHUD
         playerName={nickname}
         coins={coins}
@@ -58,22 +65,18 @@ const Sylvarin = () => {
         onInventoryToggle={handleInventoryToggle}
       />
 
-      {/* 🏞️ Byvisning */}
       <CityLayout
         cityName=""
         description=""
         backgroundImage="/images/Sylvarin3.png"
       >
-        {/* 🏙️ Byheader */}
         <div className={styles.cityHeader}>
           <h1 className={styles.cityName}>Sylvarin</h1>
           <p className={styles.cityDescription}>
-            Beneath the canopies of Sundara, Sylvarin blossoms in harmony with the forest.
-            Here, song, spirit, and sunlight are one.
+            Among the whispering trees and glowing flora, Sylvarin stands as a beacon of harmony between nature and magic.
           </p>
         </div>
 
-        {/* 🛒 Markedsknapp */}
         <div
           className={styles.marketHotspot}
           onClick={handleMarketOpen}
@@ -82,7 +85,6 @@ const Sylvarin = () => {
           Enter Market
         </div>
 
-        {/* 🧭 Reiseknapp */}
         <div
           className={styles.travelHotspot}
           onClick={handleTravelOpen}
@@ -91,15 +93,34 @@ const Sylvarin = () => {
           Begin Journey
         </div>
 
-        {/* 📦 Modalene */}
-        {isInventoryOpen && (
-          <InventoryModal items={items} onClose={handleInventoryToggle} />
-        )}
         {isMarketOpen && (
           <MarketModal city="Sylvarin" onClose={handleMarketClose} />
         )}
+
+        {isInventoryOpen && (
+          <InventoryModal items={items} onClose={handleInventoryToggle} />
+        )}
+
         {isTravelOpen && (
-          <TravelModal city="Sylvarin" onClose={handleTravelClose} />
+          <TravelModal
+            city="Sylvarin"
+            onClose={handleTravelClose}
+            onTravel={handleTravel}
+          />
+        )}
+
+        {showIntro && (
+          <div className={styles.introModal}>
+            <div className={styles.introContent}>
+              <h2>Welcome to Sylvarin</h2>
+              <p>
+                Nestled within the heart of the ancient forest, Sylvarin is a sanctuary where elves and mystical creatures coexist, preserving the balance of nature and arcane arts.
+              </p>
+              <button className={styles.closeButton} onClick={() => setShowIntro(false)}>
+                Continue
+              </button>
+            </div>
+          </div>
         )}
       </CityLayout>
     </>

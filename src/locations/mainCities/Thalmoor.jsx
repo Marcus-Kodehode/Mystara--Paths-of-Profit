@@ -1,3 +1,5 @@
+// src/locations/mainCities/Thalmoor.jsx
+
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CityLayout from '../shared/CityLayout';
@@ -9,10 +11,12 @@ import TravelModal from '../../components/travel/TravelModal';
 
 const Thalmoor = () => {
   const audioRef = useRef(null);
+  const navigate = useNavigate();
+
   const [isMarketOpen, setMarketOpen] = useState(false);
   const [isInventoryOpen, setInventoryOpen] = useState(false);
   const [isTravelOpen, setTravelOpen] = useState(false);
-  const navigate = useNavigate();
+  const [showIntro, setShowIntro] = useState(false);
 
   const nickname = localStorage.getItem('playerNickname');
   const health = localStorage.getItem('playerHealth');
@@ -26,6 +30,13 @@ const Thalmoor = () => {
       audio.volume = 0.5;
       audio.play().catch((err) => console.warn('Autoplay failed:', err));
     }
+
+    const hasVisited = localStorage.getItem('visitedThalmoor');
+    if (!hasVisited) {
+      setShowIntro(true);
+      localStorage.setItem('visitedThalmoor', 'true');
+    }
+
     return () => {
       if (audio) audio.pause();
     };
@@ -36,9 +47,7 @@ const Thalmoor = () => {
   const handleInventoryToggle = () => setInventoryOpen(!isInventoryOpen);
   const handleTravelOpen = () => setTravelOpen(true);
   const handleTravelClose = () => setTravelOpen(false);
-  const handleTravel = (path) => {
-    navigate(path);
-  };
+  const handleTravel = (path) => navigate(path);
 
   return (
     <>
@@ -82,18 +91,32 @@ const Thalmoor = () => {
           Begin Journey
         </div>
 
-        {isInventoryOpen && (
-          <InventoryModal items={items} onClose={handleInventoryToggle} />
-        )}
         {isMarketOpen && (
           <MarketModal city="Thalmoor" onClose={handleMarketClose} />
+        )}
+        {isInventoryOpen && (
+          <InventoryModal items={items} onClose={handleInventoryToggle} />
         )}
         {isTravelOpen && (
           <TravelModal
             city="Thalmoor"
             onClose={handleTravelClose}
-            onTravel={handleTravel} // ✅ Denne linjen er avgjørende
+            onTravel={handleTravel}
           />
+        )}
+
+        {showIntro && (
+          <div className={styles.introModal}>
+            <div className={styles.introContent}>
+              <h2>Welcome to Thalmoor</h2>
+              <p>
+                Nestled between golden dunes and oasis markets, Thalmoor thrives on trade, whispers, and opportunity. The Kavari make no apologies—every coin is earned or taken.
+              </p>
+              <button className={styles.closeButton} onClick={() => setShowIntro(false)}>
+                Continue
+              </button>
+            </div>
+          </div>
         )}
       </CityLayout>
     </>

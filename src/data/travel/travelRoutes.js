@@ -14,7 +14,7 @@ const travelRoutes = {
         path: '/city/thalmoor',
         description: 'The desert jewel of the Kavari—a place where coins speak louder than swords.',
         danger: 'Easy',
-        image: '/images/locations/thalmoor-card.webp',
+        image: '/images/travel/thalmoor-header.webp',
       },
     ],
     Grumhollow: [
@@ -32,7 +32,7 @@ const travelRoutes = {
         path: '/city/grumhollow',
         description: 'Deep within the Drakthar Peaks lies Grumhollow—a dwarven bastion of stone, steam, and stubborn pride.',
         danger: 'Easy',
-        image: '/images/locations/grumhollow-card.webp',
+        image: '/images/travel/grumhollow-header.webp',
       },
     ],
     Sylvarin: [
@@ -50,7 +50,7 @@ const travelRoutes = {
         path: '/city/sylvarin',
         description: 'Beneath the canopies of Sundara, Sylvarin blossoms in harmony with the forest.',
         danger: 'Easy',
-        image: '/images/locations/sylvarin-card.webp',
+        image: '/images/travel/sylvarin-header.webp',
       },
     ],
     NymRasha: [
@@ -68,7 +68,7 @@ const travelRoutes = {
         path: '/city/nymrasha',
         description: 'Shrouded in the mists of Verdanthollow, Nym’Rasha breathes with ancient spirits.',
         danger: 'Medium',
-        image: '/images/locations/nymrasha-card.webp',
+        image: '/images/travel/Nym-Rasha-header.webp',
       },
     ],
   };
