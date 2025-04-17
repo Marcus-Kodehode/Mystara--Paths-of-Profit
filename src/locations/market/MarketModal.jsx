@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import styles from './MarketModal.module.css';
 import marketData from './marketData';
 import allItems from '../../data/items';
@@ -9,7 +9,7 @@ const MarketModal = ({ onClose, city }) => {
   const [coins, setCoins] = useState(parseInt(localStorage.getItem('playerCoins')) || 0);
   const [flashItemId, setFlashItemId] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const standardItems = marketData.standard?.items || [];
   const consumables = marketData.standard?.consumables || [];

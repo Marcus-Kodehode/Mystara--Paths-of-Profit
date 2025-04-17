@@ -1,0 +1,65 @@
+/* src/components/travel/EventModal.module.css */
+.overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.8);
+    display: flex; justify-content: center; align-items: center;
+    z-index: 2000;
+  }
+  .content {
+    background: rgba(28,23,15,0.95);
+    border: 2px solid #fcbf49;
+    border-radius: 12px;
+    padding: 24px;
+    max-width: 500px;
+    text-align: center;
+    font-family: 'Cinzel Decorative', serif;
+    color: #fbeec1;
+  }
+  .title {
+    font-size: 1.8rem;
+    color: #fcbf49;
+    margin-bottom: 0.5rem;
+  }
+  .description {
+    margin-bottom: 1rem;
+    line-height: 1.4;
+  }
+  /* Effekt‑boks */
+  .effects {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .effect {
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    font-weight: bold;
+  }
+  /* Positiv effekt = grønn / lys farge */
+  .pos {
+    background-color: rgba( 46,125,50, 0.2);
+    color: #a5d6a7;
+    border: 1px solid #81c784;
+  }
+  /* Negativ effekt = rød / varm farge */
+  .neg {
+    background-color: rgba(183,28,28, 0.2);
+    color: #ef9a9a;
+    border: 1px solid #e57373;
+  }
+  .continueButton {
+    background-color: #fcbf49;
+    color: #1a1a1a;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+  }
+  .continueButton:hover {
+    background-color: #ffd166;
+  }
+  

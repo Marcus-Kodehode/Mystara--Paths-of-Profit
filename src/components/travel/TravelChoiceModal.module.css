@@ -1,0 +1,109 @@
+/* src/components/travel/TravelChoiceModal.module.css */
+
+/* Overlay */
+.modalOverlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Container */
+  .modalContent {
+    background-color: rgba(28, 23, 15, 0.95);
+    border: 3px solid #fcbf49;
+    border-radius: 12px;
+    padding: 24px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 0 20px rgba(0,0,0,0.8);
+    font-family: 'Cinzel Decorative', serif;
+    text-align: center;
+    color: #fbeec1;
+  }
+  
+  /* Title */
+  .title {
+    font-size: 2rem;
+    color: #fcbf49;
+    margin-bottom: 1rem;
+  }
+  
+  /* Button container */
+  .buttonGroup {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Choice buttons */
+  .choiceButton {
+    background-color: #fcbf49;
+    color: #1a1a1a;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    min-width: 120px;
+    /* Example for adding an icon:
+       background-image: url('/icons/safe-route.png');
+       background-repeat: no-repeat;
+       background-position: 8px center;
+       padding-left: 36px;
+    */
+  }
+  
+  .choiceButton:hover {
+    background-color: #ffd166;
+  }
+  
+  /* Cancel button */
+  .closeButton {
+    background: transparent;
+    color: #fcbf49;
+    border: 2px solid #fcbf49;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  
+  .closeButton:hover {
+    background-color: #fcbf49;
+    color: #1a1a1a;
+  }
+  
+  /* Scrollbar styling consistent with other modals */
+  .modalContent::-webkit-scrollbar {
+    width: 8px;
+  }
+  .modalContent::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+  }
+  .modalContent::-webkit-scrollbar-thumb {
+    background: #e6ac2a;
+    border-radius: 4px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+  }
+  .modalContent::-webkit-scrollbar-thumb:hover {
+    background: #ffd166;
+  }
+  /* Firefox */
+  .modalContent {
+    scrollbar-width: thin;
+    scrollbar-color: #e6ac2a rgba(0,0,0,0.2);
+  }
+  

@@ -1,119 +1,151 @@
+/* src/components/travel/TravelModal.module.css */
 .modalOverlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.7);
-    z-index: 100;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .modalContent {
-    background-color: rgba(28, 23, 15, 0.95);
-    border: 2px solid #fcbf49;
-    border-radius: 12px;
-    padding: 24px;
-    max-width: 880px;
-    width: 95%;
-    color: #fbeec1;
-    font-family: 'Cinzel Decorative', serif;
-    text-align: center;
-    overflow-y: auto;
-    max-height: 90vh;
-    box-shadow: 0 0 20px #000;
-  }
-  
-  .title {
-    font-size: 2rem;
-    margin-bottom: 16px;
-    color: #fcbf49;
-  }
-  
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 20px;
-    margin-bottom: 16px;
-  }
-  
-  .card {
-    background-color: rgba(0, 0, 0, 0.6);
-    border: 1px solid #fcbf49;
-    border-radius: 10px;
-    padding: 14px;
-    text-align: center;
-    color: #fbeec1;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
-  }
-  
-  .imageWrapper {
-    width: 100%;
-    height: 120px;
-    margin-bottom: 10px;
-    overflow: hidden;
-    border-radius: 6px;
-    border: 1px solid #fcbf49;
-  }
-  
-  .locationImage {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
-  .name {
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: #fff3c1;
-    margin-bottom: 4px;
-    text-transform: uppercase;
-  }
-  
-  .description {
-    font-size: 0.9rem;
-    margin-bottom: 6px;
-  }
-  
-  .danger {
-    font-size: 0.85rem;
-    font-style: italic;
-    color: #ffd166;
-    margin-bottom: 10px;
-  }
-  
-  .travelButton {
-    background-color: #fcbf49;
-    color: #1a1a1a;
-    border: none;
-    padding: 6px 12px;
-    border-radius: 6px;
-    font-weight: bold;
-    font-family: inherit;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-  }
-  
-  .travelButton:hover {
-    background-color: #ffd166;
-  }
-  
-  .closeButton {
-    margin-top: 10px;
-    background: none;
-    border: 1px solid #fcbf49;
-    color: #fcbf49;
-    padding: 6px 12px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-family: inherit;
-    font-weight: bold;
-  }
-  
-  .closeButton:hover {
-    background-color: #fcbf49;
-    color: #1a1a1a;
-  }
-  
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalContent {
+  background-color: rgba(28, 23, 15, 0.95);
+  border: 2px solid #fcbf49;
+  border-radius: 12px;
+  padding: 24px;
+  max-width: 880px;
+  width: 95%;
+  color: #fbeec1;
+  font-family: 'Cinzel Decorative', serif;
+  text-align: center;
+  overflow-y: auto;
+  max-height: 90vh; /* behold */
+  box-shadow: 0 0 20px #000;
+}
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 16px;
+  color: #fcbf49;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  margin-bottom: 16px;
+}
+
+.card {
+  background-color: rgba(0, 0, 0, 0.6);
+  border: 1px solid #fcbf49;
+  border-radius: 10px;
+  padding: 14px;
+  text-align: center;
+  color: #fbeec1;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Her har vi økt høyden slik at hele bildet vises,
+   men beholdt overflow:hidden slik at det ikke krymper modalen */
+.imageWrapper {
+  width: 100%;
+  height: 200px;            /* Økt fra 120px til 200px */
+  margin-bottom: 10px;
+  overflow: hidden;
+  border-radius: 6px;
+  border: 1px solid #fcbf49;
+}
+
+.locationImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;        /* Gjør at bildet fyller hele wrapperen */
+  display: block;
+}
+
+.name {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #fff3c1;
+  margin: 8px 0 4px;
+  text-transform: uppercase;
+}
+
+.description {
+  font-size: 0.9rem;
+  margin-bottom: 6px;
+}
+
+.danger {
+  font-size: 0.85rem;
+  font-style: italic;
+  color: #ffd166;
+  margin-bottom: 10px;
+}
+
+.travelButton {
+  background-color: #fcbf49;
+  color: #1a1a1a;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-weight: bold;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.travelButton:hover {
+  background-color: #ffd166;
+}
+
+.closeButton {
+  margin-top: 10px;
+  background: none;
+  border: 1px solid #fcbf49;
+  color: #fcbf49;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: bold;
+}
+
+.closeButton:hover {
+  background-color: #fcbf49;
+  color: #1a1a1a;
+}
+/* src/components/travel/TravelModal.module.css */
+
+/* … eksisterende regler … */
+
+/* Scrollbar for TravelModal */
+.modalContent::-webkit-scrollbar {
+  width: 8px;
+}
+.modalContent::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+.modalContent::-webkit-scrollbar-thumb {
+  background: #e6ac2a;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+}
+.modalContent::-webkit-scrollbar-thumb:hover {
+  background: #ffd166;
+}
+
+/* Firefox-støtte */
+.modalContent {
+  scrollbar-width: thin;
+  scrollbar-color: #e6ac2a rgba(0, 0, 0, 0.2);
+}
