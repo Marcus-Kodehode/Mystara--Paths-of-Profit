@@ -93,10 +93,10 @@ export default function Grumhollow() {
 
     // game over?
     if (newHP <= 0) {
-      localStorage.clear();
-      navigate('/');
+      navigate('/game-over'); // 👈 sender til ny GameOver-skjerm
       return;
     }
+    
 
     localStorage.setItem('playerHealth',  String(newHP));
     localStorage.setItem('playerStamina', String(newST));

@@ -92,10 +92,10 @@ export default function Sylvarin() {
 
     // Game over?
     if (newHP <= 0) {
-      localStorage.clear();
-      navigate('/');
+      navigate('/game-over'); // 👈 sender til ny GameOver-skjerm
       return;
     }
+    
 
     // Lagre stats
     localStorage.setItem('playerHealth',  String(newHP));

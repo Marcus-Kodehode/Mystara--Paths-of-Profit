@@ -87,10 +87,10 @@ export default function RedBasin() {
     const newST   = Math.min(MAX_ST,  stamina + (currentEvent.staminaDelta || 0));
     const newGold = coins + (currentEvent.goldDelta || 0);
     if (newHP <= 0) {
-      localStorage.clear();
-      navigate('/');
+      navigate('/game-over'); // 👈 sender til ny GameOver-skjerm
       return;
     }
+    
     localStorage.setItem('playerHealth',  String(newHP));
     localStorage.setItem('playerStamina', String(newST));
     localStorage.setItem('playerCoins',   String(newGold));

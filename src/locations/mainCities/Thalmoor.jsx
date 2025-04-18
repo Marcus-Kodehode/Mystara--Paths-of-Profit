@@ -97,11 +97,10 @@ export default function Thalmoor() {
     const newGold = coins + (currentEvent.goldDelta || 0);
 
     if (newHP <= 0) {
-      // Game over → restart
-      localStorage.clear();
-      navigate('/');
+      navigate('/game-over'); // 👈 sender til ny GameOver-skjerm
       return;
     }
+    
 
     localStorage.setItem('playerHealth',  String(newHP));
     localStorage.setItem('playerStamina', String(newST));

@@ -3,6 +3,7 @@ import { useRef, useEffect } from 'react';
 import StartScreen from './screens/StartScreen';
 import RaceSelect from './screens/RaceSelect';
 import GameStart from './screens/GameStart';
+import GameOver from './components/GameOver';
 import Thalmoor from './locations/mainCities/Thalmoor';
 import Grumhollow from './locations/mainCities/Grumhollow';
 import Sylvarin from './locations/mainCities/Sylvarin';
@@ -56,6 +57,7 @@ function AppRoutes() {
       <Route path="/" element={<StartScreen />} />
       <Route path="/select-race" element={<RaceSelect />} />
       <Route path="/start" element={<GameStart />} />
+      <Route path="/game-over" element={<GameOver />} />
       <Route path="/city/thalmoor" element={<Thalmoor />} />
       <Route path="/city/grumhollow" element={<Grumhollow />} />
       <Route path="/city/sylvarin" element={<Sylvarin />} />

@@ -86,10 +86,10 @@ export default function IrvathGlade() {
     const newGold = coins + (ev.goldDelta || 0);
 
     if (newHP <= 0) {
-      localStorage.clear();
-      navigate('/');
+      navigate('/game-over'); // 👈 sender til ny GameOver-skjerm
       return;
     }
+    
 
     localStorage.setItem('playerHealth',  String(newHP));
     localStorage.setItem('playerStamina', String(newST));

@@ -4,7 +4,7 @@ const travelRoutes = {
   Thalmoor: [
     {
       name: 'Red Basin',
-      path: '/lesser/redbasin',
+      path: '/lesserLocations/redbasin',
       description: 'A sun‑scorched basin dotted with caves and ancient bones.',
       danger: 'Easy',
       image: '/images/travel/red-basin-header.webp',
@@ -27,7 +27,7 @@ const travelRoutes = {
   Grumhollow: [
     {
       name: 'Runebreak',
-      path: '/lesser/runebreak',
+      path: '/lesserLocations/runebreak',
       description: 'Cracked paths and ancient ruins lie ahead. Dwarves say the stones still hum with forgotten power.',
       danger: 'Easy',
       image: '/images/travel/runebreak-header.webp',
