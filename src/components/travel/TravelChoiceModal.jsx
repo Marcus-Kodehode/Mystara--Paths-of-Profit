@@ -1,28 +1,14 @@
+// src/components/travel/TravelChoiceModal.jsx
 import React from 'react';
 import styles from './TravelChoiceModal.module.css';
-import GameHUD from '../GameHUD';
-import InventoryModal from '../InventoryModal';
 
 const TravelChoiceModal = ({
   cityName,
   daysLeft,
-  health, stamina, coins,
-  items,
-  isInventoryOpen,
-  onInventoryToggle,
   onClose,
   onChoose
 }) => (
   <div className={styles.modalOverlay}>
-    {/* HUD + toggle inventar */}
-    <GameHUD
-      health={health}
-      stamina={stamina}
-      coins={coins}
-      onInventoryToggle={onInventoryToggle}
-    />
-    {isInventoryOpen && <InventoryModal items={items} onClose={onInventoryToggle} />}
-
     <div className={styles.modalContent}>
       <h2 className={styles.title}>Traveling to {cityName}</h2>
       <p className={styles.days}>Days remaining: {daysLeft}</p>

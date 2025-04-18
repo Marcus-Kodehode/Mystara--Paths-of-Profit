@@ -60,10 +60,10 @@ function AppRoutes() {
       <Route path="/city/grumhollow" element={<Grumhollow />} />
       <Route path="/city/sylvarin" element={<Sylvarin />} />
       <Route path="/city/nymrasha" element={<NymRasha />} />
-      <Route path="/lesser/redbasin" element={<RedBasin />} />
-      <Route path="/lesser/runebreak" element={<Runebreak />} />
-      <Route path="/lesser/irvathglade" element={<IrvathGlade />} />
-      <Route path="/lesser/quickfanghollow" element={<QuickfangHollow />} />
+      <Route path="/lesserLocations/redbasin" element={<RedBasin />} />
+      <Route path="/lesserLocations/runebreak" element={<Runebreak />} />
+      <Route path="/lesserLocations/irvathglade" element={<IrvathGlade />} />
+      <Route path="/lesserLocations/quickfanghollow" element={<QuickfangHollow />} />
     </Routes>
   );
 }

@@ -1,3 +1,4 @@
+// src/hooks/useTravelEvents.js
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import safeEvents      from '../data/travel/events/safeEvents';
@@ -7,15 +8,15 @@ import riskyGoodEvents from '../data/travel/events/riskyGoodEvents';
 export function useTravelEvents() {
   const navigate = useNavigate();
 
-  // modal-states
-  const [travelOpen, setTravelOpen]   = useState(false);
-  const [choiceOpen, setChoiceOpen]   = useState(false);
-  const [eventOpen,  setEventOpen]    = useState(false);
+  // modal‐states
+  const [travelOpen, setTravelOpen] = useState(false);
+  const [choiceOpen, setChoiceOpen] = useState(false);
+  const [eventOpen, setEventOpen]   = useState(false);
 
-  // reise-data
+  // reise‐data
   const [selectedRoute, setSelectedRoute] = useState(null);
-  const [daysLeft,       setDaysLeft]      = useState(0);
-  const [currentEvent,   setCurrentEvent]  = useState(null);
+  const [daysLeft, setDaysLeft]           = useState(0);
+  const [currentEvent, setCurrentEvent]   = useState(null);
 
   const maxHealth  = 100;
   const maxStamina = 100;
@@ -30,12 +31,13 @@ export function useTravelEvents() {
     setChoiceOpen(false);
   }
 
-  // Starter reisen, sjekker stamina først:
+  // Starter reisen, sjekker total‐stamina mot antall dager
   function startTravel(route, stats) {
-    if (stats.stamina < route.travelDays) {
+    if (stats.stamina < route.travelDays * 5) {
+      // hvis du vil kreve 5 stamina/dag * dag‐antall
       setCurrentEvent({
         title: 'Too Tired',
-        description: `You need ${route.travelDays} stamina but have only ${stats.stamina}.`,
+        description: `You need ${route.travelDays * 5} stamina to make this journey but have only ${stats.stamina}.`,
         healthDelta: 0,
         staminaDelta: 0,
         goldDelta: 0,
@@ -50,7 +52,7 @@ export function useTravelEvents() {
     setChoiceOpen(true);
   }
 
-  // Håndterer safe / risky / camp
+  // Håndterer Safe / Risky / Camp
   function chooseTravel(choice, stats) {
     let ev;
     if (choice === 'safe') {
@@ -59,22 +61,26 @@ export function useTravelEvents() {
       const pool = Math.random() < 0.5 ? riskyGoodEvents : riskyBadEvents;
       ev = pool[Math.floor(Math.random() * pool.length)];
     } else {
-      // camp
+      // Camp
       ev = {
         title: 'You Make Camp',
-        description: 'You recover fully but lose one extra day.',
+        description: 'You recover fully—but it adds an extra travel day.',
         healthDelta: maxHealth - stats.health,
         staminaDelta: maxStamina - stats.stamina,
         goldDelta: 0,
         dayDelta: 1,
       };
     }
+
+    // *** Her trekker vi alltid fra 5 stamina per dag ***
+    ev.staminaDelta = (ev.staminaDelta || 0) - 5;
+
     setCurrentEvent(ev);
     setChoiceOpen(false);
     setEventOpen(true);
   }
 
-  // Når spilleren trykker Continue i EventModal
+  // Når spiller trykker Continue i EventModal
   function handleEventContinue(stats) {
     const ev = currentEvent;
     const newHealth  = Math.min(maxHealth,  stats.health + ev.healthDelta);
@@ -98,12 +104,12 @@ export function useTravelEvents() {
       return;
     }
 
-    // Lagre oppdatert stats
+    // Lagre stats
     localStorage.setItem('playerHealth',  String(newHealth));
     localStorage.setItem('playerStamina', String(newStamina));
     localStorage.setItem('playerCoins',   String(newCoins));
 
-    // Reduser dager igjen
+    // Reduser dager igjen og eventuelle camp‐dager
     const next = daysLeft - 1 + (ev.dayDelta || 0);
     setDaysLeft(next);
     setEventOpen(false);
