@@ -9,10 +9,6 @@
 
 Spillet er bygget i React med fokus på komponentbasert arkitektur, elegant brukergrensesnitt, og et system som bruker `localStorage` for lagring av spillerens fremgang. Du velger en rase ved oppstart, hver med sin unike lore og startutstyr. Derfra venter verden på deg – med varierende priser, skjulte eventyr og farer langs handelsrutene.
 
-> // 💍 One bug to find them  
-> // 🔥 One fix to bring them all  
-> // 💡 And in the darkness bind them.
-
 ---
 
 ## 🧾 Oppgaveoversikt og løsningsstruktur
@@ -70,6 +66,7 @@ src/
 │   ├── ItemCard.jsx          # Kort for items
 │
 ├── locations/
+│   ├── lesserLocations/      # Red Basin, Runebreak, osv.
 │   ├── mainCities/           # Thalmoor, Grumhollow, osv.
 │   ├── market/               # MarketModal og marketData
 │   ├── shared/               # GameStart, RaceSelect, CityLayout
@@ -157,3 +154,7 @@ Jeg er spesielt stolt av hvordan markedet ble dynamisk, og at det gir spilleren 
 ---
 
 Takk for at du sjekker ut prosjektet mitt! 🎮🧙‍♂️
+
+> // 💍 One bug to find them  
+> // 🔥 One fix to bring them all  
+> // 💡 And in the darkness bind them.
