@@ -5,7 +5,7 @@
 
 ## 🎮 Introduksjon
 
-**Enchanted Merchant’s Guild** er et eventyrspill hvor du spiller som en handelsreisende i en magisk verden. Målet er å tjene rikdom gjennom smart handel, byreiser og risiko, mens du samler spesialvarer og overlever farlige reiser.
+**Mystara** er et eventyrspill hvor du spiller som en handelsreisende i en magisk verden. Målet er å tjene rikdom gjennom smart handel, byreiser og risiko, mens du samler spesialvarer og overlever farlige reiser.
 
 Spillet er bygget i React med fokus på komponentbasert arkitektur, elegant brukergrensesnitt, og et system som bruker `localStorage` for lagring av spillerens fremgang. Du velger en rase ved oppstart, hver med sin unike lore og startutstyr. Derfra venter verden på deg – med varierende priser, skjulte eventyr og farer langs handelsrutene.
 
