@@ -9,6 +9,7 @@ export default function ItemCard({
   onAction,
   actionLabel = '',
   isFlashing = false,
+  priceOverride = null,
 }) {
   const cardClass = [
     styles.card,
@@ -16,46 +17,38 @@ export default function ItemCard({
     isFlashing ? styles.flash : ''
   ].filter(Boolean).join(' ');
 
-  const name = item.name;
+  const name        = item.name;
   const effect      = itemData.effect      || '';
   const description = itemData.description || '';
   const imageSrc    = itemData.image       || '';
 
-  const basePrice = itemData.price ?? item.price ?? 0;
-  const price = isSell
-    ? (name === 'Rusty Sword' || name === 'Leather Tunic'
-        ? 5
-        : Math.floor(basePrice / 2))
-    : basePrice;
-
+  const basePrice = priceOverride ?? item.price ?? itemData.price ?? 0;
+  const displayPrice = isSell ? basePrice : basePrice;
   const label = actionLabel || (isSell ? 'Sell' : 'Use');
 
   return (
     <div className={cardClass}>
-      {imageSrc && (
-        <img
-          src={imageSrc}
-          alt={name}
-          className={styles.itemImage}
-        />
-      )}
-
+      {imageSrc && <img src={imageSrc} alt={name} className={styles.itemImage} />}
       <div className={styles.name}>{name}</div>
       {effect && <div className={styles.effect}>{effect}</div>}
       {description && <div className={styles.description}>{description}</div>}
-      {price > 0 && (
+
+      {displayPrice > 0 && (
         <div className={styles.price}>
-          {isSell ? `Sell for ${price} coins` : `${price} coins`}
+          {isSell ? `Sell for ${displayPrice} coins` : `${displayPrice} coins`}
+        </div>
+      )}
+
+      {!isSell && item.suggestedSell && (
+        <div className={styles.suggestedPrice}>
+          Suggested resale: {item.suggestedSell} coins
         </div>
       )}
 
       {onAction && (
         <button
           className={styles.actionButton}
-          onClick={() => {
-            console.log('[ItemCard] onAction click for:', name);
-            onAction(item);
-          }}
+          onClick={() => onAction(item)}
           disabled={actionLabel === 'Used!'}
         >
           {label}

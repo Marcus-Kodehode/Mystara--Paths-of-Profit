@@ -34,30 +34,51 @@ function GameStart({ audioRef }) {
     localStorage.setItem('playerHealth', '100');
     localStorage.setItem('playerStamina', '100');
     localStorage.setItem('playerCoins', '500');
-    localStorage.setItem('playerInventory', JSON.stringify({
+  
+    const baseInventory = {
       items: [
-        { name: "Rusty Sword", type: "weapon" },
-        { name: "Leather Tunic", type: "armor" }
+        { name: "Rusty Sword", type: "weapon", price: 10 },
+        { name: "Leather Tunic", type: "armor", price: 10 }
       ],
       consumables: [
-        { name: "Health Potion", type: "consumable" },
-        { name: "Stamina Potion", type: "consumable" }
+        { name: "Health Potion", type: "consumable", price: 50 },
+        { name: "Stamina Potion", type: "consumable", price: 50 }
       ],
-      special: [
-        {
-          name:
-            selectedRace === 'Kavari'
-              ? 'Spice Pack'
-              : selectedRace === 'Dhurak'
-              ? 'Helm of Vitality'
-              : selectedRace === 'Elarin'
-              ? 'Forest Amulet'
-              : 'Jungle Medallion',
-          type: "special"
-        }
-      ]
-    }));
+      special: []
+    };
+  
+    // Legg til spesialgjenstand basert på rase
+    if (selectedRace === 'Kavari') {
+      baseInventory.special.push({
+        name: 'Spice Pack',
+        type: 'trade',
+        price: 200,         // startpris (du kan bruke hva som helst her)
+        origin: 'Thalmoor',
+        boughtAt: 'Thalmoor'
+      });
+    } else if (selectedRace === 'Dhurak') {
+      baseInventory.special.push({
+        name: 'Helm of Vitality',
+        type: 'special',
+        price: 250
+      });
+    } else if (selectedRace === 'Elarin') {
+      baseInventory.special.push({
+        name: 'Forest Amulet',
+        type: 'special',
+        price: 250
+      });
+    } else if (selectedRace === 'Felarii') {
+      baseInventory.special.push({
+        name: 'Jungle Medallion',
+        type: 'special',
+        price: 250
+      });
+    }
+  
+    localStorage.setItem('playerInventory', JSON.stringify(baseInventory));
   }, [selectedRace]);
+  
 
   const handleEnterCity = () => {
     if (audioRef?.current) {

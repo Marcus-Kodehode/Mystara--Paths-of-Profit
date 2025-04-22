@@ -48,7 +48,12 @@ export default function InventoryModal({ items, onClose }) {
 
     // Fjern potion fra localInv
     setLocalInv((prev) => {
-      const newConsum = prev.consumables.filter((c) => c.name !== item.name);
+      const newConsum = [...prev.consumables];
+      const indexToRemove = newConsum.findIndex((c) => c.name === item.name);
+      if (indexToRemove !== -1) {
+        newConsum.splice(indexToRemove, 1); // fjern kun én
+      }
+
       console.log('[InventoryModal] Removing from consumables:', item.name);
       return { ...prev, consumables: newConsum };
     });
